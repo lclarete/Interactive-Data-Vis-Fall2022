@@ -1,5 +1,12 @@
 ## NOTES
 
+* The task went easier than I expected. The goals were well-defined and straightforward to follow through;
+
+* It required some attention to details, which help me to feel like I'm understanding the process;
+
+* No blockers.
+
+
 -----------
 INSTRUCTIONS:
 Use this markdown file to keep track of open questions/challenges from this week's assignment.
