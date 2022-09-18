@@ -8,7 +8,7 @@
          <path stroke="white" d="M50 0 V100" />
          <path stroke="white" d="M75 0 V100" /> -->
 > * I ended up adding a single image to the SVG image.
-* I struggled while designing the page: how can I combine the elements? Which one should be placed first, the table or the rectangle?
+* Struggles while designing the page: combining elements is not an easy task. Creating a story that make sense requires a planning to place and connect the elements. 
 
 -----------
 INSTRUCTIONS:
