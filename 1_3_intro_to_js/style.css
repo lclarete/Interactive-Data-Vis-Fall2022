@@ -21,3 +21,27 @@ p {
 section {
   padding: 2em 0;
 }
+
+div {
+  text-align: center;
+}
+
+#clickHere button {
+  background-color: #479549;
+  border: none;
+  color: white;
+  padding: 15px 35px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+#reset button {
+  background-color: #a82323;
+  border: none;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 5px;
+}
