@@ -5,11 +5,32 @@
   <title>Interactive Data Visualization Tutorial</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
   <link rel="stylesheet" href="./style.css">
+
+  <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+
 </head>
+
 <body>
+  
   <h1>Hello World!</h1>
   <h3>Tutorial Assignment: 1_3_intro_to_js </h3>
-  <!-- add any HTML you might need here, like a button or a div -->
-  <script src="main.js"></script>
+
+  <div class='countBtn' id="clickHere">
+    <p>Counting user clicks; then reseting the counting.</p>
+    <button>Click here!</button>
+  </div>
+
+  <div class='countNum'>
+    <p>Check the number of clicks:</p>
+    <h1>0</h1>
+  </div>
+
+
+  <div class='resetBtn' id="reset">
+    <button>Reset count</button>
+  </div>
+  <script src='main.js'></script>
+
 </body>
+
 </html>
