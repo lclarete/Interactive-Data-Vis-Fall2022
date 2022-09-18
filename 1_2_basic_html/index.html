@@ -1,19 +1,114 @@
 
 <!DOCTYPE html>
+
 <head>
   <meta charset="utf-8">
   <title>Interactive Data Visualization Tutorial</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
   <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
   <h1>Hello World!</h1>
   <h3>Tutorial Assignment: 1_2_basic_html </h3>
-  <table>
-    <!-- Add your table data here -->
-  </table>
-  <svg>
-    <!-- Add your rectangles in here -->
-  </svg>
+
+  <svg viewBox="0 0 100 1" xmlns="http://www.w3.org/2000/svg">
+   <g color="black">
+     <rect width="400" height="1" fill="currentcolor"/>
+   </g>
+ </svg>
+ 
+  <table class="w3-table w3-bordered">
+    <p>Selected online companies ranked by total digital advertising revenue from 2012 to 2021 (billion dollars)</p>
+    
+    <!-- table head -->
+    <thead>
+      <th title="Field #1">Year</th>
+      <th title="Field #2">Google</th>
+      <th title="Field #3">Meta</th>
+      <th title="Field #4">Twitter</th>
+    </thead>
+
+    <!-- table body -->
+    <tbody><tr>
+      <td>2012</td>
+      <td>43.69</td>
+      <td>4.28</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <td>2013</td>
+      <td>51.07</td>
+      <td>6.99</td>
+      <td>0.59</td>
+    </tr>
+    <tr>
+      <td>2014</td>
+      <td>59.62</td>
+      <td>11.49</td>
+      <td>1.25</td>
+    </tr>
+    <tr>
+      <td>2015</td>
+      <td>67.39</td>
+      <td>17.08</td>
+      <td>1.99</td>
+    </tr>
+    <tr>
+      <td>2016</td>
+      <td>79.38</td>
+      <td>26.89</td>
+      <td>2.25</td>
+    </tr>
+    <tr>
+      <td>2017</td>
+      <td>95.58</td>
+      <td>39.94</td>
+      <td>2.11</td>
+    </tr>
+    <tr>
+      <td>2018</td>
+      <td>116.46</td>
+      <td>55.01</td>
+      <td>2.62</td>
+    </tr>
+    <tr>
+      <td>2019</td>
+      <td>134.81</td>
+      <td>69.66</td>
+      <td>2.99</td>
+    </tr>
+    <tr>
+      <td>2020</td>
+      <td>146.92</td>
+      <td>84.17</td>
+      <td>3.21</td>
+    </tr>
+    <tr>
+      <td>2021</td>
+      <td>209.5</td>
+      <td>114.93</td>
+      <td>4.51</td>
+    </tr>
+    </tbody></table>
+    
+    <button onclick="window.location.href='https://www.statista.com/statistics/205352/digital-advertising-revenue-of-leading-online-companies';">
+      Click here to access the source </button>
+
+    <!-- SVG rectangle -->
+
+    <svg viewBox="0 0 100 1" xmlns="http://www.w3.org/2000/svg">
+      <g color="black">
+        <rect width="400" height="1" fill="currentcolor"/>
+      </g>
+    </svg>
+
+    <li> The revenue of social media companies has been increasing in the last 10 years.</li>
+    <li> Since the Cambridge Analytica Scandal in 2018, Meta (then Facebook) has more than doubled it's digital ads revenue from 55B to 114.93B in 2021.</li>
+    <li> More details about social media companies revenue in the table below: </li>
+    
+   <!-- Adding an image -->
+   <img src="https://static.vecteezy.com/system/resources/thumbnails/003/600/947/small/set-of-social-media-icon-in-round-bakground-free-vector.jpg" alt="Italian Trulli">
+
 </body>
 </html>
