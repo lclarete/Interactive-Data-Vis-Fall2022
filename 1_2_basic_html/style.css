@@ -17,4 +17,29 @@ h3 {
 
 p {
   font-size: 1em;
+  font-weight: bold
 }
+
+table {
+  border-collapse: collapse;
+  width:90%
+}
+
+/* table heads */
+th{
+  padding: 8px;
+  border-bottom: 1px;
+  background-color: #f7f6f6;
+  color: black;
+  font-weight: bold;
+}
+
+/* table data */
+td{
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  height: 25px;
+  vertical-align: center;
+}
+
+tr:hover {background-color: rgb(246, 201, 185);}
