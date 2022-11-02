@@ -1,18 +1,213 @@
-
 /* CONSTANTS AND GLOBALS */
-// const width = ;
-// const height = ;
 
+ // set the dimensions and margins of the graph
+//  At first, it was challenging to think what is a margin.
+// The greater the numbers, the smallest the chart, which was contra-intuitive for me
+// Then, I understand that the margins are not the chart measurements, but the object in the middle of it
+// Setting up a marging means defining the space which does not contain a chart
+// It is where we don't have a chart
+// that's the reason why it's easier to define the width and the height by subtracting the left and right margin, and the top and botton, in this order
+var margin = {
+  top: 100, 
+  bottom: 150, 
+  right: 200, 
+  left: 100},
+
+width = 860 - margin.left - margin.right,
+height = 500 - margin.top - margin.bottom;
+
+ 
+// It does not work when I add const in front of the variable
+// const width = 500;
+// const height = 300;
+const data = "/data/world-happiness-report.csv"
+// const data2 = "https://raw.githubusercontent.com/prasertcbs/basic-dataset/master/Startups%20in%202021%20end.csv"
+
+
+function load_data(data){
+  var data = d3.csv(data, d3.autoType).
+    then(data)
+  return data
+}
+
+function make_x_scale(){
+  var x = d3.scaleBand()
+          .range([0, width])
+          .padding(0.1);
+  return x
+}
+
+function make_y_scale(){
+  var y = d3.scaleLinear()
+            .range([height, 50]);
+  return y
+}
+
+function select_html_element(selector){
+  /* HTML ELEMENTS */
+  /** Select your container and append the visual elements to it */
+  // append the svg object to the body of the page
+  // append a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  var svg = d3.select(selector).append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  return svg
+}
+
+function append_axis(svg_element){
+  svg_element.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
+
+  // y Axis
+  svg_element.append("g")
+    .call(d3.axisLeft(y));
+}
+
+// chart 1
 /* LOAD DATA */
-d3.csv('../[PATH_TO_YOUR_DATA]', d3.autoType)
+d3.csv(data, d3.autoType)
   .then(data => {
-    console.log("data", data)
+    // SCALES: from data to pixel space - set the axes ranges
+    var x = make_x_scale()
+    var y = make_y_scale()
 
-    /* SCALES */
-    /** This is where you should define your scales from data to pixel space */
+    var nest = d3.rollups(data, v => d3.mean(v, d => d['Log GDP per capita']), d => d['Country name'])
+
+    var BarData = []
+    nest.forEach(d=>{
+      BarData.push({country:d[0] , value:d[1]})
+    })
+    console.log('bar' , BarData)
+
+    //sort the data in descending order
+    //a-b means ascending order, b-a means descennding order
+    var result =  BarData.sort(function(a, b){return b.value - a.value})
+    //slice data to keep top 10 only
+    result = result.slice(0,10)
+    console.log('result', result)
     
+    // Scale the range of the data in the domains
+    x.domain(result.map(function(d) { return d.country; }));
+    y.domain([d3.min(result, function(d) { return d.value; }), d3.max(result, function(d) { return d.value; })]).nice();
 
-    /* HTML ELEMENTS */
-    /** Select your container and append the visual elements to it */
+  /* HTML ELEMENTS */
+    var svg = select_html_element(div_1)
 
-  })
+// append the data/ rectangles for the bar chart
+    svg.selectAll(".bar")
+      .data(result)
+      .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.country); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr('fill' , '#01274b')
+
+// append the axes to the chart 
+// x Axis
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    // y Axis
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+      //add axis labels
+      // text label for the y axis
+    svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Log GDP per capita"); 
+
+    // text label for the x axis
+    svg.append("text")             
+    .attr("transform",
+          "translate(" + (width/2) + " ," + 
+                        (height + margin.top ) + ")")
+    .style("text-anchor", "middle")
+    .text("Country");
+
+});
+
+
+
+// chart 2
+/* LOAD DATA */
+d3.csv(data, d3.autoType)
+  .then(data => {
+    // SCALES: from data to pixel space - set the axes ranges
+    var x = make_x_scale()
+    var y = make_y_scale()
+
+    var nest = d3.rollups(data, v => d3.mean(v, d => d['Log GDP per capita']), d => d['Country name'])
+
+    var BarData = []
+    nest.forEach(d=>{
+      BarData.push({country:d[0] , value:d[1]})
+    })
+    console.log('bar' , BarData)
+
+    //sort the data in descending order
+    //a-b means ascending order, b-a means descennding order
+    var result =  BarData.sort(function(a, b){return b.value - a.value})
+    //slice data to keep top 10 only
+    result = result.slice(0,10)
+    console.log('result', result)
+    
+    // Scale the range of the data in the domains
+    x.domain(result.map(function(d) { return d.country; }));
+    y.domain([d3.min(result, function(d) { return d.value; }), d3.max(result, function(d) { return d.value; })]).nice();
+
+  /* HTML ELEMENTS */
+    var svg = select_html_element(div_1)
+
+// append the data/ rectangles for the bar chart
+    svg.selectAll(".bar")
+      .data(result)
+      .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.country); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr('fill' , '#01274b')
+
+// append the axes to the chart 
+// x Axis
+    svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+    // y Axis
+    svg.append("g")
+      .call(d3.axisLeft(y));
+
+      //add axis labels
+      // text label for the y axis
+    svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Log GDP per capita"); 
+
+    // text label for the x axis
+    svg.append("text")             
+    .attr("transform",
+          "translate(" + (width/2) + " ," + 
+                        (height + margin.top ) + ")")
+    .style("text-anchor", "middle")
+    .text("Country");
+
+});
+
