@@ -26,7 +26,7 @@ var svg = d3.select("body").append("svg")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.csv("/data/world-happiness-report.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/world-happiness-report.csv").then(function(data) {
 
   // format the data
   data.forEach(function(d) {
