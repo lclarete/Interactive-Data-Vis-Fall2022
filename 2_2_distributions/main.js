@@ -1,101 +1,257 @@
 /* CONSTANTS AND GLOBALS */
-// const width = ,
-//   height = ,
-//   margin = ,
-//   radius = ;
 
-/* LOAD DATA */
-// d3.json("https://gist.githubusercontent.com/d3noob/3aa3bbe05ee97b35af660c25ee27213b/raw/63e86d4267d42c153d29f4332f932468f28064a7/data.csv", d3.autoType)
-//   .then(data => {
-//     console.log(data)
+ // set the dimensions and margins of the graph
+//  At first, it was challenging to think what is a margin.
+// The greater the numbers, the smallest the chart, which was contra-intuitive for me
+// Then, I understand that the margins are not the chart measurements, but the object in the middle of it
+// Setting up a marging means defining the space which does not contain a chart
+// It is where we don't have a chart
+// that's the reason why it's easier to define the width and the height by subtracting the left and right margin, and the top and botton, in this order
+var margin = {
+  top: 35, 
+  bottom: 150, 
+  right: 50, 
+  left: 70},
 
-//     /* SCALES */
-    
-//     /* HTML ELEMENTS */
-    
-//   });
+width = 820 - margin.left - margin.right,
+height = 600 - margin.top - margin.bottom;
 
-// set the dimensions and margins of the graph
-var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin2 = {
+  top: 30,
+  right: 25,
+  bottom: 35,
+  left: 100
+};
+
+width2 = 560 - margin2.left - margin2.right,
+height2 = 450 - margin2.top - margin2.bottom;
 
 
-// set the ranges
-var x = d3.scaleLinear().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
 
-// define the line
-var valueline = d3.line()
-    .x(function(d) { return x(d['Log GDP per capita']); })
-    .y(function(d) { return y(d['Social support']); });
+ 
+// It does not work when I add const in front of the variable
+// const width = 500;
+// const height = 300;
+const data = "/data/world-happiness-report.csv"
+// const data2 = "https://raw.githubusercontent.com/prasertcbs/basic-dataset/master/Startups%20in%202021%20end.csv"
 
-// append the svg obgect to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+
+function load_data(data){
+  var data = d3.csv(data, d3.autoType).
+    then(data)
+  return data
+}
+
+function make_x_scale(){
+  var x = d3.scaleBand()
+          .range([0, width])
+          .padding(0.1);
+          
+  return x
+}
+
+
+function make_y_scale(){
+  var y = d3.scaleLinear()
+            .range([height, 50]);
+  return y
+}
+
+function make_x_scale2(){
+  var x = d3.scaleLinear()
+            .range([0, width2]);
+  return x
+}
+function make_y_scale2(){
+  var y = d3.scaleBand()
+          .range([height2, 0])
+          .padding(0.1);
+          
+  return y
+}
+
+function select_html_element(selector){
+  /* HTML ELEMENTS */
+  /** Select your container and append the visual elements to it */
+  // append the svg object to the body of the page
+  // append a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  var svg = d3.select(selector).append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  return svg
+}
 
-// Get the data
-d3.csv("/data/world-happiness-report.csv").then(function(data) {
-
-  // format the data
-  data.forEach(function(d) {
-      d['Log GDP per capita'] = +(d['Log GDP per capita']);
-      d['Social support'] = +d['Social support'];
-      d['Perceptions of corruption'] = +d['Perceptions of corruption']
-  });
-
-  // Scale the range of the data
-  x.domain(d3.extent(data, function(d) { return d['Log GDP per capita']; }));
-  y.domain([ d3.min(data, function(d) { return d['Social support']; }), d3.max(data, function(d) { return d['Social support']; })]);
-
-  var z = d3.scaleLinear()
-    .domain(d3.extent(data, function(d) { return d['Perceptions of corruption']; }))
-    .range([ 3, 10])
-
-  // Add the scatterplot
-  svg.selectAll("dot")
-      .data(data)
-    .enter().append("circle")
-      .attr("r", function(d) { return z(d['Perceptions of corruption']); })
-      .attr("cx", function(d) { return x(d['Log GDP per capita']); })
-      .attr("cy", function(d) { return y(d['Social support']); })
-      .attr('fill' , 'blue')
-      .attr('stroke' , 'black');
-
-      
-      // text label
-      svg.append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left)
-      .attr("x",0 - (height / 2))
-      .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .text("Social Support"); 
-  
-      // text label for the x axis
-      svg.append("text")             
-      .attr("transform",
-            "translate(" + (width/2) + " ," + 
-                          (height + margin.top +10) + ")")
-      .style("text-anchor", "middle")
-      .text('Log GDP per capita');
+function select_html_element2(selector){
+  /* HTML ELEMENTS */
+  /** Select your container and append the visual elements to it */
+  // append the svg object to the body of the page
+  // append a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  var svg = d3.select(selector).append("svg")
+  .attr("width", width2 + margin2.left + margin2.right)
+  .attr("height", height2 + margin2.top + margin2.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+  return svg
+}
 
 
+function append_axis(svg_element){
+  svg_element.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x));
 
+  // y Axis
+  svg_element.append("g")
+    .call(d3.axisLeft(y));
+}
 
-  // Add the X Axis
-  svg.append("g")
+// chart 1
+/* LOAD DATA */
+d3.csv(data, d3.autoType)
+  .then(data => {
+    // SCALES: from data to pixel space - set the axes ranges
+    var x = make_x_scale()
+    var y = make_y_scale()
+
+    var nest = d3.rollups(data, v => d3.mean(v, d => d['Log GDP per capita']), d => d['Country name'])
+
+    var BarData = []
+    nest.forEach(d=>{
+      BarData.push({country:d[0] , value:d[1]})
+    })
+    console.log('bar' , BarData)
+
+    //sort the data in descending order
+    //a-b means ascending order, b-a means descennding order
+    var result =  BarData.sort(function(a, b){return b.value - a.value})
+    //slice data to keep top 10 only
+    result = result.slice(0,10)
+    console.log('result', result)
+    
+    // Scale the range of the data in the domains
+    x.domain(result.map(function(d) { return d.country; }));
+    y.domain([d3.min(result, function(d) { return d.value; }), d3.max(result, function(d) { return d.value; })]).nice();
+
+  /* HTML ELEMENTS */
+    var svg = select_html_element(div_1)
+
+// append the data/ rectangles for the bar chart
+    svg.selectAll(".bar")
+      .data(result)
+      .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.country); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("width", x.bandwidth())
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr('fill' , '#01274b')
+
+    
+
+// append the axes to the chart 
+// x Axis
+    svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
 
-  // Add the Y Axis
-  svg.append("g")
+    // y Axis
+    svg.append("g")
       .call(d3.axisLeft(y));
+
+      //add axis labels
+      // text label for the y axis
+    svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Log GDP per capita"); 
+
+    // text label for the x axis
+    svg.append("text")             
+    .attr("transform",
+          "translate(" + (width/2) + " ," + 
+                        (height + margin.top ) + ")")
+    .style("text-anchor", "middle")
+    .text("Country");
+
+});
+
+
+// ---------------------------------second chart horizontal---------------------------
+
+d3.csv(data, d3.autoType)
+.then(data => {
+  // SCALES: from data to pixel space - set the axes ranges
+  var x = make_x_scale2()
+  var y = make_y_scale2()
+
+  var nest = d3.rollups(data, v => d3.mean(v, d => d['Log GDP per capita']), d => d['Country name'])
+
+  var BarData = []
+  nest.forEach(d=>{
+    BarData.push({country:d[0] , value:d[1]})
+  })
+  console.log('bar' , BarData)
+
+  //sort the data in descending order
+  //a-b means ascending order, b-a means descennding order
+  var result =  BarData.sort(function(a, b){return b.value - a.value})
+  //slice data to keep top 10 only
+  result = result.slice(0,10)
+  console.log('result2', result)
+  
+  // Scale the range of the data in the domains
+  y.domain(result.map(function(d) { return d.country; }));
+  x.domain([d3.min(result, function(d) { return d.value; }), d3.max(result, function(d) { return d.value; })]).nice();
+
+/* HTML ELEMENTS */
+  var svg2 = select_html_element2(div_2)
+
+
+    // append the data/ rectangles for the bar chart
+    svg2.selectAll(".bar")
+    .data(result)
+    .enter()
+    .append("rect")
+    .attr("x", 0 )
+    .attr("y", function(d) { return y(d.country); })
+    .attr("width", function(d) { return x(d.value); })
+    .attr("height", y.bandwidth() )
+    .attr('fill' , '#01274b')
+
+   
+  // append the axes to the chart 
+  // x Axis
+  svg2.append("g")
+  .attr("transform", "translate(0," + height2 + ")")
+  .call(d3.axisBottom(x));
+
+  // y Axis
+  svg2.append("g")
+  .call(d3.axisLeft(y));
+
+  //add axis labels
+  // text label for the y axis
+  svg2.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 0 - margin2.left)
+  .attr("x",0 - (height2 / 2))
+  .attr("dy", "1em")
+  .style("text-anchor", "middle")
+  .text("Log GDP per capita"); 
+
+  // text label for the x axis
+  svg2.append("text")             
+  .attr("transform",
+      "translate(" + (width2/2) + " ," + 
+                    (height2 + margin2.top ) + ")")
+  .style("text-anchor", "middle")
+  .text("Country");
 
 });
