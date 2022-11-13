@@ -32,7 +32,7 @@ height2 = 450 - margin2.top - margin2.bottom;
 // It does not work when I add const in front of the variable
 // const width = 500;
 // const height = 300;
-const data = "/data/world-happiness-report.csv"
+const data = "https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/world-happiness-report.csv"
 // const data2 = "https://raw.githubusercontent.com/prasertcbs/basic-dataset/master/Startups%20in%202021%20end.csv"
 
 
