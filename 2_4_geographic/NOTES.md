@@ -1,5 +1,8 @@
 ## NOTES
 
+Using worldwide geojson to update data about the Perceptions of corruption (2020). 
+The red dot (circle) is pointed to Croatia, the country with the highest perception of corruption in the world in 2020.
+
 -----------
 INSTRUCTIONS:
 Use this markdown file to keep track of open questions/challenges from this week's assignment.
