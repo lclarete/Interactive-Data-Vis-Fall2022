@@ -225,7 +225,7 @@ d3.csv(data, d3.autoType)
   .attr("x",0 - (height2 / 2))
   .attr("dy", "1em")
   .style("text-anchor", "middle")
-  .text("Log GDP per capita"); 
+  .text("Country"); 
 
   // text label for the x axis
   svg2.append("text")             
@@ -233,6 +233,6 @@ d3.csv(data, d3.autoType)
       "translate(" + (width2/2) + " ," + 
                     (height2 + margin2.top ) + ")")
   .style("text-anchor", "middle")
-  .text("Country");
+  .text("Log GDP per capita");
 
 });
