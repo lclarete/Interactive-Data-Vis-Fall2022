@@ -23,7 +23,7 @@ const colorScale = d3.scaleThreshold()
 
 // Load external data and boot
 Promise.all([
-d3.json("/data/map.geojson"), //map data
+d3.json("https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/map.geojson"), //map data
 d3.csv("https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/world-happiness-report.csv", function(d) {
   // console.log('hello', d)
     data.set(d['Country name']
