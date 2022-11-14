@@ -6,7 +6,10 @@ At first, it was challenging to think what is a margin. The greater the numbers,
 ### Functions
 I'm still figuring out a way to work more productively with JS, and it's my first time working with functions. Organizing the ideas using functions make things a lot of easiers.
 
-### 
+### Axes
+The process of creating the bar chart started with reading the data, setting the scales, followed by sorting the data, setting the data range to the domains. Then, setting svg object and appending the data there. Lastly, setting the axes to the chart. To reverse the chart from vertical to horizontal, the data was appended to svg based on the y variable, instead of the x. 
+
+
 
 -----------
 INSTRUCTIONS:

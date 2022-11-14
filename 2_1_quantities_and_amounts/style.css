@@ -1,12 +1,14 @@
 body {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
-  padding: 1em;
+  padding: 2em;
+  /* color: black; */
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 4em;
   margin: 0.25em 0;
+  color:darkgray
 }
 
 h3 {

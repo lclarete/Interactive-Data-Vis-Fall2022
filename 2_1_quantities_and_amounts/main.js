@@ -133,7 +133,6 @@ d3.csv(data, d3.autoType)
       .attr("height", function(d) { return height - y(d.value); })
       .attr('fill' , '#01274b')
 
-    
 
 // append the axes to the chart 
 // x Axis
