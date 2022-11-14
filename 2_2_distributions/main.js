@@ -20,7 +20,6 @@ var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-
 // set the ranges
 var x = d3.scaleLinear().range([0, width]);
 var y = d3.scaleLinear().range([height, 0]);
@@ -41,14 +40,17 @@ var svg = d3.select("body").append("svg")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Get the data
-d3.csv("https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/world-happiness-report.csv").then(function(data) {
+d3.csv("https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/world-happiness-report_2020.csv").then(function(data) {
 
   // format the data
   data.forEach(function(d) {
       d['Log GDP per capita'] = +(d['Log GDP per capita']);
       d['Social support'] = +d['Social support'];
       d['Perceptions of corruption'] = +d['Perceptions of corruption']
+      d['Freedom to make life choices'] = +d['Freedom to make life choices']
   });
+
+  var color = d3.scaleOrdinal(data.map(d => d['Freedom to make life choices']), d3.schemeCategory10)
 
   // Scale the range of the data
   x.domain(d3.extent(data, function(d) { return d['Log GDP per capita']; }));
@@ -65,10 +67,9 @@ d3.csv("https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022
       .attr("r", function(d) { return z(d['Perceptions of corruption']); })
       .attr("cx", function(d) { return x(d['Log GDP per capita']); })
       .attr("cy", function(d) { return y(d['Social support']); })
-      .attr('fill' , 'blue')
-      .attr('stroke' , 'black');
+      .attr('fill' , '#090262')
+      .attr("fill", d => color(d['Freedom to make life choices']));
 
-      
       // text label
       svg.append("text")
       .attr("transform", "rotate(-90)")
@@ -85,9 +86,6 @@ d3.csv("https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022
                           (height + margin.top +10) + ")")
       .style("text-anchor", "middle")
       .text('Log GDP per capita');
-
-
-
 
   // Add the X Axis
   svg.append("g")

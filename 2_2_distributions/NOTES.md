@@ -1,4 +1,5 @@
 ## NOTES
+The chart was implemented using the happines index, comparing social support with Log GDP per capita sized by Perceptions of corruption. There's a positive linear correlation between the GDP and social support. Also, countries with the least perceptio of corruption also rank higher in GDP and Social Support. Dots colored by Fredom of Make Choices
 
 -----------
 INSTRUCTIONS:
