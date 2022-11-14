@@ -1,5 +1,13 @@
 ## NOTES
 
+### Margins
+At first, it was challenging to think what is a margin. The greater the numbers, the smallest the chart, which was contra-intuitive for me Then, I understand that the margins are not the chart measurements, but the object in the middle of it Setting up a marging means defining the space which does not contain a chart It is where we don't have a chart that's the reason why it's easier to define the width and the height by subtracting the left and right margin, and the top and botton, in this order
+
+### Functions
+I'm still figuring out a way to work more productively with JS, and it's my first time working with functions. Organizing the ideas using functions make things a lot of easiers.
+
+### 
+
 -----------
 INSTRUCTIONS:
 Use this markdown file to keep track of open questions/challenges from this week's assignment.

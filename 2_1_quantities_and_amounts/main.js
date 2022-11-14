@@ -1,12 +1,6 @@
 /* CONSTANTS AND GLOBALS */
 
- // set the dimensions and margins of the graph
-//  At first, it was challenging to think what is a margin.
-// The greater the numbers, the smallest the chart, which was contra-intuitive for me
-// Then, I understand that the margins are not the chart measurements, but the object in the middle of it
-// Setting up a marging means defining the space which does not contain a chart
-// It is where we don't have a chart
-// that's the reason why it's easier to define the width and the height by subtracting the left and right margin, and the top and botton, in this order
+ // set the dimensions and margins of the vertical chart
 var margin = {
   top: 35, 
   bottom: 150, 
@@ -16,6 +10,7 @@ var margin = {
 width = 820 - margin.left - margin.right,
 height = 600 - margin.top - margin.bottom;
 
+// margins for the horizontal chart
 var margin2 = {
   top: 30,
   right: 25,
@@ -27,29 +22,18 @@ width2 = 560 - margin2.left - margin2.right,
 height2 = 450 - margin2.top - margin2.bottom;
 
 
-
  
 // It does not work when I add const in front of the variable
 // const width = 500;
 // const height = 300;
 const data = "https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/world-happiness-report.csv"
-// const data2 = "https://raw.githubusercontent.com/prasertcbs/basic-dataset/master/Startups%20in%202021%20end.csv"
-
-
-function load_data(data){
-  var data = d3.csv(data, d3.autoType).
-    then(data)
-  return data
-}
 
 function make_x_scale(){
   var x = d3.scaleBand()
           .range([0, width])
           .padding(0.1);
-          
   return x
 }
-
 
 function make_y_scale(){
   var y = d3.scaleLinear()
@@ -66,7 +50,6 @@ function make_y_scale2(){
   var y = d3.scaleBand()
           .range([height2, 0])
           .padding(0.1);
-          
   return y
 }
 
@@ -212,7 +195,6 @@ d3.csv(data, d3.autoType)
 
 /* HTML ELEMENTS */
   var svg2 = select_html_element2(div_2)
-
 
     // append the data/ rectangles for the bar chart
     svg2.selectAll(".bar")
