@@ -2,12 +2,12 @@
 
  // set the dimensions and margins of the vertical chart
 var margin = {
-  top: 35, 
-  bottom: 150, 
-  right: 50, 
+  top: 30, 
+  bottom: 200, 
+  right: 150, 
   left: 70},
 
-width = 820 - margin.left - margin.right,
+width = 700 - margin.left - margin.right,
 height = 600 - margin.top - margin.bottom;
 
 // margins for the horizontal chart
@@ -26,7 +26,7 @@ height2 = 450 - margin2.top - margin2.bottom;
 // It does not work when I add const in front of the variable
 // const width = 500;
 // const height = 300;
-const data = "https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/world-happiness-report_2020.csv"
+const data = "https://raw.githubusercontent.com/lclarete/Interactive-Data-Vis-Fall2022/main/data/world-happiness-report.csv"
 
 function make_x_scale(){
   var x = d3.scaleBand()
