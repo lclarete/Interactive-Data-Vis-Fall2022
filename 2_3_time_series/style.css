@@ -17,3 +17,24 @@ h3 {
 p {
   font-size: 1em;
 }
+
+.line {
+  fill: rgb(10, 35, 55);
+  stroke: steelblue;
+  shape-rendering: optimizeSpeed
+}
+
+.yaxis {
+  fill: none;
+  /* stroke: black; */
+  stroke: rgb(35, 33, 33);
+  stroke-width: 1;
+}
+
+.xaxis {
+  fill: white;
+  /* stroke: black; */
+  stroke: rgb(246, 239, 239);
+
+  stroke-width: 1;
+}
