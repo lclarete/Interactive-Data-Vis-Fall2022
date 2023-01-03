@@ -3,12 +3,21 @@
     <meta charset="utf-8">
     <title>Interactive Data Visualization Tutorial</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
-    <link rel="stylesheet" href="./style.css">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
   </head>
   <body>
     <h3>Section 3 | Quantities and Amounts</h3>
+    <svg width="600" height="1"></svg>
+
+    <!-- div that will be modified by D3 -->
+    <div style="display: inline-flex;">
+      <div id="div_1"></div>
+
+      <div id="div_2"></div>
+    </div>
+
     <div id="container"> </div>
-    <script src="../lib/d3.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
